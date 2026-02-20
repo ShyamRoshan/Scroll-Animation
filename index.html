@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shyam Roshan S — Resume Portfolio</title>
+
+<style>
+/* ---------- GLOBAL ---------- */
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family: "Segoe UI", Tahoma, sans-serif;
+}
+
+body{
+  background:#0b0f17;
+  color:#e6edf3;
+  overflow-x:hidden;
+}
+
+/* ---------- SCROLL ANIMATION BACKGROUND ---------- */
+#frameCanvas{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100vw;
+  height:100vh;
+  z-index:-1;
+  opacity:0.12;             /* watermark transparency */
+  pointer-events:none;      /* prevents blocking clicks */
+}
+
+/* subtle gradient overlay for readability */
+body::after{
+  content:"";
+  position:fixed;
+  inset:0;
+  background:linear-gradient(to bottom,
+      rgba(11,15,23,0.7),
+      rgba(11,15,23,0.95));
+  z-index:-1;
+}
+
+/* ---------- MAIN CONTAINER ---------- */
+.container{
+  max-width:900px;
+  margin:auto;
+  padding:80px 20px;
+}
+
+/* ---------- HEADER ---------- */
+header{
+  text-align:center;
+  margin-bottom:60px;
+}
+
+h1{
+  font-size:3rem;
+  font-weight:700;
+  color:#58a6ff;
+}
+
+.subtitle{
+  margin-top:10px;
+  font-size:1.1rem;
+  opacity:0.8;
+}
+
+/* ---------- SECTION ---------- */
+section{
+  margin-bottom:50px;
+  background:rgba(255,255,255,0.03);
+  backdrop-filter:blur(6px);
+  padding:25px 30px;
+  border-radius:14px;
+  border:1px solid rgba(255,255,255,0.08);
+}
+
+section h2{
+  color:#58a6ff;
+  margin-bottom:15px;
+  border-bottom:2px solid rgba(88,166,255,0.3);
+  padding-bottom:5px;
+}
+
+/* ---------- LIST ---------- */
+ul{
+  padding-left:20px;
+}
+
+li{
+  margin-bottom:8px;
+}
+
+/* ---------- CONTACT ---------- */
+.contact{
+  text-align:center;
+  margin-top:10px;
+  line-height:1.8;
+}
+
+.contact a{
+  color:#58a6ff;
+  text-decoration:none;
+}
+
+.contact a:hover{
+  text-decoration:underline;
+}
+
+/* ---------- FOOTER ---------- */
+footer{
+  text-align:center;
+  margin-top:80px;
+  opacity:0.6;
+  font-size:0.9rem;
+}
+</style>
+</head>
+
+<body>
+
+<!-- Scroll Animation Canvas -->
+<canvas id="frameCanvas"></canvas>
+
+<div class="container">
+
+<header>
+  <h1>Shyam Roshan S</h1>
+  <div class="subtitle">B.E. Electronics & Communication Engineering (III Year)</div>
+
+  <div class="contact">
+    📍 Kalakad, Tirunelveli<br>
+    📞 +91 70109 71796<br>
+    ✉ shyamroshan12@gmail.com<br>
+    🔗 <a href="https://www.linkedin.com/in/shyam-roshan-s-9a1bab329" target="_blank">
+      LinkedIn Profile
+    </a>
+  </div>
+</header>
+
+<section>
+  <h2>Objective</h2>
+  <p>
+    Motivated and detail-oriented student seeking an opportunity at CODEM
+    to apply technical skills, problem-solving ability, and passion for learning
+    in a dynamic environment while contributing effectively to innovative projects.
+  </p>
+</section>
+
+<section>
+  <h2>Education</h2>
+  <ul>
+    <li><b>B.E. ECE</b> — Government College of Engineering, Tirunelveli (Pursuing, III Year) — 8 CGPA</li>
+    <li><b>DECE</b> — AKY Polytechnic College, Tirunelveli (2024) — 90%</li>
+    <li><b>SSLC (ICSE)</b> — Cathedral High School, Bangalore (2021) — 90%</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Certificate</h2>
+  <ul>
+    <li>Full Stack Development — NoviTech R&D Private Limited</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Project</h2>
+  <p>
+    <b>Obstacle Avoiding Robot</b><br>
+    Built an autonomous robot using Arduino UNO, ultrasonic sensors,
+    and motor driver modules to detect and avoid obstacles in real time.
+    Presented at Tech Expo 2024.
+  </p>
+</section>
+
+<section>
+  <h2>Skills</h2>
+  <ul>
+    <li>MS Word, Excel, PowerPoint</li>
+    <li>C Programming</li>
+    <li>Java</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Languages Known</h2>
+  <ul>
+    <li>English — Read, Write, Speak</li>
+    <li>Tamil — Read, Speak</li>
+    <li>Kannada — Read, Write, Speak</li>
+    <li>Hindi — Read, Write</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Hobbies</h2>
+  <ul>
+    <li>Photography</li>
+    <li>Watching movies & series</li>
+    <li>Listening to music</li>
+  </ul>
+</section>
+
+<footer>
+  © 2026 Shyam Roshan S — Resume Portfolio
+</footer>
+
+</div>
+
+<script>
+/* ---------- SCROLL FRAME ANIMATION ---------- */
+
+const frameCount = 240;
+const canvas = document.getElementById("frameCanvas");
+const context = canvas.getContext("2d");
+
+function resizeCanvas(){
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+resizeCanvas();
+window.addEventListener("resize", resizeCanvas);
+
+// Load images
+const images = [];
+const currentFrame = i =>
+  `frames/ezgif-frame-${String(i).padStart(3,'0')}.jpg`;
+
+for(let i=1; i<=frameCount; i++){
+  const img = new Image();
+  img.src = currentFrame(i);
+  images.push(img);
+}
+
+function drawImage(img){
+  context.clearRect(0,0,canvas.width,canvas.height);
+
+  // Fit image to screen while keeping aspect ratio
+  const scale = Math.max(
+    canvas.width / img.width,
+    canvas.height / img.height
+  );
+
+  const x = (canvas.width/2) - (img.width/2)*scale;
+  const y = (canvas.height/2) - (img.height/2)*scale;
+
+  context.drawImage(
+    img,
+    x,
+    y,
+    img.width * scale,
+    img.height * scale
+  );
+}
+
+// Scroll control
+window.addEventListener("scroll", () => {
+
+  const scrollTop = document.documentElement.scrollTop;
+  const maxScroll =
+    document.documentElement.scrollHeight - window.innerHeight;
+
+  const frameIndex = Math.min(
+    frameCount - 1,
+    Math.floor((scrollTop / maxScroll) * frameCount)
+  );
+
+  const img = images[frameIndex];
+  if(img.complete) drawImage(img);
+
+});
+
+// Draw first frame when loaded
+images[0].onload = () => drawImage(images[0]);
+</script>
+
+</body>
+</html>

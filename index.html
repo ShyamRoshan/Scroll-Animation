@@ -6,6 +6,7 @@
 <title>Shyam Roshan S — Resume Portfolio</title>
 
 <style>
+
 /* ---------- GLOBAL ---------- */
 *{
   margin:0;
@@ -20,30 +21,29 @@ body{
   overflow-x:hidden;
 }
 
-/* ---------- SCROLL ANIMATION BACKGROUND ---------- */
+/* ---------- ANIMATED BACKGROUND ---------- */
+
 #frameCanvas{
   position:fixed;
   top:0;
   left:0;
   width:100vw;
   height:100vh;
-  z-index:-1;
-  opacity:1;             /* watermark transparency */
-  pointer-events:none;      /* prevents blocking clicks */
+  z-index:-2;
+  opacity:0.45;              /* 🔥 MORE VISIBLE */
+  pointer-events:none;
 }
 
-/* subtle gradient overlay for readability */
-body::after{
-  content:"";
+/* dark overlay for readability */
+.overlay{
   position:fixed;
   inset:0;
-  background:linear-gradient(to bottom,
-      rgba(11,15,23,0.7),
-      rgba(11,15,23,0.95));
+  background:rgba(8,12,20,0.55);  /* balanced contrast */
   z-index:-1;
 }
 
 /* ---------- MAIN CONTAINER ---------- */
+
 .container{
   max-width:900px;
   margin:auto;
@@ -51,6 +51,7 @@ body::after{
 }
 
 /* ---------- HEADER ---------- */
+
 header{
   text-align:center;
   margin-bottom:60px;
@@ -65,39 +66,11 @@ h1{
 .subtitle{
   margin-top:10px;
   font-size:1.1rem;
-  opacity:0.8;
+  opacity:0.9;
 }
 
-/* ---------- SECTION ---------- */
-section{
-  margin-bottom:50px;
-  background:rgba(255,255,255,0.03);
-  backdrop-filter:blur(6px);
-  padding:25px 30px;
-  border-radius:14px;
-  border:1px solid rgba(255,255,255,0.08);
-}
-
-section h2{
-  color:#58a6ff;
-  margin-bottom:15px;
-  border-bottom:2px solid rgba(88,166,255,0.3);
-  padding-bottom:5px;
-}
-
-/* ---------- LIST ---------- */
-ul{
-  padding-left:20px;
-}
-
-li{
-  margin-bottom:8px;
-}
-
-/* ---------- CONTACT ---------- */
 .contact{
-  text-align:center;
-  margin-top:10px;
+  margin-top:20px;
   line-height:1.8;
 }
 
@@ -106,24 +79,49 @@ li{
   text-decoration:none;
 }
 
-.contact a:hover{
-  text-decoration:underline;
+/* ---------- SECTIONS ---------- */
+
+section{
+  margin-bottom:40px;
+  background:rgba(20,28,45,0.75); /* glass panel */
+  backdrop-filter:blur(12px);
+  padding:25px 30px;
+  border-radius:16px;
+  border:1px solid rgba(255,255,255,0.08);
+  box-shadow:0 10px 30px rgba(0,0,0,0.4);
+}
+
+section h2{
+  color:#58a6ff;
+  margin-bottom:15px;
+  border-bottom:2px solid rgba(88,166,255,0.35);
+  padding-bottom:6px;
+}
+
+ul{
+  padding-left:20px;
+}
+
+li{
+  margin-bottom:8px;
 }
 
 /* ---------- FOOTER ---------- */
+
 footer{
   text-align:center;
-  margin-top:80px;
-  opacity:0.6;
-  font-size:0.9rem;
+  margin-top:70px;
+  opacity:0.7;
 }
+
 </style>
 </head>
 
 <body>
 
-<!-- Scroll Animation Canvas -->
+<!-- Background Animation -->
 <canvas id="frameCanvas"></canvas>
+<div class="overlay"></div>
 
 <div class="container">
 
@@ -211,6 +209,7 @@ footer{
 </div>
 
 <script>
+
 /* ---------- SCROLL FRAME ANIMATION ---------- */
 
 const frameCount = 240;
@@ -235,10 +234,10 @@ for(let i=1; i<=frameCount; i++){
   images.push(img);
 }
 
+// Draw frame
 function drawImage(img){
   context.clearRect(0,0,canvas.width,canvas.height);
 
-  // Fit image to screen while keeping aspect ratio
   const scale = Math.max(
     canvas.width / img.width,
     canvas.height / img.height
@@ -273,8 +272,9 @@ window.addEventListener("scroll", () => {
 
 });
 
-// Draw first frame when loaded
+// First frame
 images[0].onload = () => drawImage(images[0]);
+
 </script>
 
 </body>
